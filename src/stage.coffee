@@ -1,4 +1,4 @@
-Spine = require('spine')
+(exports ? this).Spine = require('spine') unless (exports ? this).Spine
 $     = Spine.$
 
 globalManager = new Spine.Manager

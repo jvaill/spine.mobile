@@ -1,4 +1,4 @@
-{$} = require('spine')
+(exports ? this).$ = require('spine') unless (exports ? this).Spine
 
 $.support.touch = ('ontouchstart' of window)
   
@@ -25,6 +25,7 @@ $ ->
     touch.x1 = e.touches[0].pageX
     touch.y1 = e.touches[0].pageY
     touch.last = now
+    $(touch.target).trigger('touch')
     
   .bind 'touchmove', (e) ->
     e = e.originalEvent
@@ -50,14 +51,15 @@ if $.support.touch
     e.preventDefault()
 else
   $ -> 
-    $('body').bind 'click', (e) -> 
-      $(e.target).trigger('tap') 
+    $('body').bind 'click', (e) ->
+      $(e.target).trigger('touch').trigger('tap')
 
 types = ['swipe', 
          'swipeLeft', 
          'swipeRight', 
          'swipeUp', 
          'swipeDown', 
+         'touch', 
          'tap']
 for m in types
   do (m) ->

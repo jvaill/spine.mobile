@@ -1,6 +1,7 @@
+(exports ? this).Spine = require('spine') unless (exports ? this).Spine
 $     = Spine.$
-Gfx   = require('gfx')
-Stage = require('./stage')
+Gfx   = require('gfx') unless $.fn.gfx
+(exports ? this).Stage = require('./stage') unless (exports ? this).Stage
 
 class Panel extends Stage
   title: false
